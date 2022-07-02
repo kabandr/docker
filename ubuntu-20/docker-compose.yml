@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+    ubuntu-desktop-lxde-vnc:
+        privileged: true
+        ports:
+            - '6080:80'
+        container_name: ubuntu-lxde-vnc
+        volumes:
+            - '/var/lib/docker/volumes/ubuntu-desktop-lxde-vnc/_data:/dev/shm'
+        image: dorowu/ubuntu-desktop-lxde-vnc
