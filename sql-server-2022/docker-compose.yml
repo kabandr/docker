@@ -1,0 +1,22 @@
+# To run as Docker Swarm service with limited resources,
+# enable deploy command and specify your resources requirements,
+# then disable "container_name".
+version: '3.3'
+services:
+    mssql:
+        environment:
+            - ACCEPT_EULA=Y
+            - MSSQL_SA_PASSWORD=!YourStrongPassword # Follow MSSQL Server password policy, else your container will stop immediately.
+        ports:
+            - '1433:1433'
+        container_name: sql1
+        hostname: sql1
+        image: 'mcr.microsoft.com/mssql/server:2022-latest'
+        # deploy:
+        #   resources:
+        #     limits:
+        #       cpus: 0.50
+        #       memory: 512M
+        #     reservations:
+        #       cpus: 0.25
+        #       memory: 128M
