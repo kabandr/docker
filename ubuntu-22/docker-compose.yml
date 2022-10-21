@@ -1,0 +1,7 @@
+version: '3.3'
+services:
+    ubuntu:
+        container_name: ubuntu-22
+        image: 'ubuntu:latest'
+        stdin_open: true # docker run -i
+        tty: true        # docker run -t
