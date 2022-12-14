@@ -1,5 +1,5 @@
 # Step 1 : Create a volume for portainer data
-         # command: docker create volume portainer_data
+# command: docker create volume portainer_data
 # Step 2: run => docker compose up -d
 version: '3.3'
 services:
