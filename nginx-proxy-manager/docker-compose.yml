@@ -1,12 +1,53 @@
-version: '3' 
-services: 
-  app: 
-    image: 'jc21/nginx-proxy-manager:latest' 
-    restart: unless-stopped 
+version: '3.8'
+
+services:
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
     ports:
-      - '80:80' 
-      - '81:81' 
-      - '443:443' 
-    volumes: 
+      # Public HTTP Port:
+      - '80:80'
+      # Public HTTPS Port:
+      - '443:443'
+      # Admin Web Port:
+      - '81:81'
+    environment:
+      # These are the settings to access your db
+      DB_MYSQL_HOST: "db"
+      DB_MYSQL_PORT: 3306
+      DB_MYSQL_USER: "npm"
+      DB_MYSQL_PASSWORD__FILE: /run/secrets/MYSQL_PWD
+      DB_MYSQL_NAME: "npm"
+      # If you would rather use Sqlite, remove all DB_MYSQL_* lines above
+      # Uncomment this if IPv6 is not enabled on your host
+      DISABLE_IPV6: 'true'
+    volumes:
       - ./data:/data
       - ./letsencrypt:/etc/letsencrypt
+    secrets:
+      - source: MYSQL_PWD
+        target: /run/secrets/MYSQL_PWD
+    depends_on:
+      - db
+
+  db:
+    image: jc21/mariadb-aria
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD__FILE: /run/secrets/DB_ROOT_PWD
+      MYSQL_DATABASE: "npm"
+      MYSQL_USER: "npm"
+      MYSQL_PASSWORD__FILE: /run/secrets/MYSQL_PWD
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    secrets:
+      - source: DB_ROOT_PWD
+        target: /run/secrets/DB_ROOT_PWD
+      - source: MYSQL_PWD
+        target: /run/secrets/MYSQL_PWD
+
+secrets:
+  DB_ROOT_PWD:
+    file: .secrets/db_root_pwd.txt
+  MYSQL_PWD:
+    file: .secrets/mysql_pwd.txt
