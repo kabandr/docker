@@ -1,28 +1,26 @@
-# Step 1 : Create a volume for portainer data with
-# command: docker volume create portainer_data
-# Step 2: run => docker compose up -d
 version: "3"
 services:
   portainer-ce:
     container_name: portainer
-    image: "portainer/portainer-ce:latest"
+    image: portainer/portainer-ce:latest
     ports:
       - "8000:8000"
       - "9443:9443"
     restart: unless-stopped
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-      - "portainer_data:/data"
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
     networks:
-      - network2
-
+      - nginx-proxy-manager_default
+      
 volumes:
   portainer_data:
 
 networks:
-  network2:
-    external:
-      name: nginx-proxy-manager_default
+  nginx-proxy-manager_default:
+    external: true
+  
+    
 
 
 
