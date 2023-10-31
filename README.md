@@ -1,8 +1,6 @@
 # Docker Compose Services
 
-A repository containing Docker Services I frequently use for development and testing. 
-
-This repository contains Docker Compose files for various services and containers. You can find detailed setup instructions and configurations for each service in their respective directories.
+This repository contains Docker Compose files for various services and containers I use frequently for development and testing. You can find detailed setup instructions and configurations for each service in their respective directories.
 
 ## Services
 
