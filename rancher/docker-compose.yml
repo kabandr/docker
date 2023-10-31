@@ -2,6 +2,7 @@ version: '3'
 
 services:
   rancher:
+    container_name: rancher
     image: rancher/rancher:latest
     restart: always
     ports:
