@@ -22,8 +22,8 @@ services:
       # Uncomment this if IPv6 is not enabled on your host
       DISABLE_IPV6: 'true'
     volumes:
-      - ./data:/data
-      - ./letsencrypt:/etc/letsencrypt
+      - ./data/app:/data
+      - ./data/letsencrypt:/etc/letsencrypt
     secrets:
       - source: MYSQL_PWD
         target: /run/secrets/MYSQL_PWD
