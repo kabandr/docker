@@ -34,7 +34,7 @@ This repository contains Docker Compose files for various services and container
 
 Each service directory contains a Docker Compose file and additional configuration files specific to that service. To set up a particular service, navigate to the respective folder and follow the instructions in the README or documentation provided. 
 
-Where no instructions where given, simply run: `docker compose up -d`.
+Where no instructions were given, simply run: `docker compose up -d`.
 
 ## Contributing
 
