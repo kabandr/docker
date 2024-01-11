@@ -1,0 +1,3 @@
+elk-default-networkpolicy.yaml
+elk-deployment.yaml
+elk-service.yaml

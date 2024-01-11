@@ -1,0 +1,5 @@
+.env
+etc-dnsmasq.d/
+etc-pihole/
+var-log/
+
