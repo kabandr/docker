@@ -1,0 +1,4 @@
+certs/
+custom-templates/
+media/
+.env
