@@ -16,6 +16,7 @@ services:
       POSTGRES_DB: ${PG_DB:-authentik}
     env_file:
       - .env
+  
   redis:
     image: docker.io/library/redis:alpine
     command: --save 60 1 --loglevel warning
@@ -28,6 +29,7 @@ services:
       timeout: 3s
     volumes:
       - redis:/data
+  
   server:
     image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2024.6.4}
     restart: unless-stopped
@@ -49,6 +51,7 @@ services:
     depends_on:
       - postgresql
       - redis
+  
   worker:
     image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2024.6.4}
     restart: unless-stopped
