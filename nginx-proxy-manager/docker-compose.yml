@@ -1,8 +1,7 @@
-version: '3.8'
-
 services:
   app:
     image: 'jc21/nginx-proxy-manager:latest'
+    container_name: nproxy
     restart: unless-stopped
     ports:
       # Public HTTP Port:
@@ -32,6 +31,7 @@ services:
 
   db:
     image: jc21/mariadb-aria
+    container_name: nproxy-db
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD__FILE: /run/secrets/DB_ROOT_PWD
