@@ -1,10 +1,10 @@
-version: '3'
-
 services:
   rancher:
     container_name: rancher
     image: rancher/rancher:latest
     restart: always
+    environment:
+    - CATTLE_SERVER_URL=https://rancher.local
     ports:
     - "80:80/tcp"
     - "443:443/tcp"
