@@ -1,0 +1,4 @@
+apps/
+rancher-data/
+traefik/
+rancher-kubeconfig.yaml
