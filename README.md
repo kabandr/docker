@@ -40,7 +40,7 @@ Each service is organized in its own directory with configuration files and setu
 - [SQL Server 2022](sql-server-2022)
 - [TeamCity](teamcity)
 - [Traefik](traefik)
-- [Ubuntu 22.04](ubuntu-22)
+- [Ubuntu 26.04](ubuntu-26)
 - [Ubuntu Desktop with LXDE](ubuntu-desktop-lxde)
 - [Unifi Controller](unifi-controller)
 - [Uptime Kuma](uptime-kuma)
