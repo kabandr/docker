@@ -1,0 +1,50 @@
+services:
+  nextcloud:
+    image: lscr.io/linuxserver/nextcloud:latest
+    container_name: nextcloud
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - DB_TYPE=mysql
+      - DB_HOST=mariadb:3306
+      - DB_NAME=${NEXTCLOUD_DB_NAME:-nextcloud}
+      - DB_USER=${NEXTCLOUD_DB_USER:-nextcloud}
+      - DB_PASS=${NEXTCLOUD_DB_PASSWORD}
+    volumes:
+      - ${PLEX_DATA_PATH}/nextcloud/config:/config
+      - ${PLEX_DATA_PATH}/nextcloud/data:/data
+    ports:
+      - 443:443
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    networks:
+      - nextcloud
+    restart: unless-stopped
+
+  mariadb:
+    image: lscr.io/linuxserver/mariadb:latest
+    container_name: nextcloud-mariadb
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - MYSQL_ROOT_PASSWORD=${NEXTCLOUD_DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${NEXTCLOUD_DB_NAME:-nextcloud}
+      - MYSQL_USER=${NEXTCLOUD_DB_USER:-nextcloud}
+      - MYSQL_PASSWORD=${NEXTCLOUD_DB_PASSWORD}
+    volumes:
+      - ${PLEX_DATA_PATH}/nextcloud/db:/config
+    networks:
+      - nextcloud
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "--silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+networks:
+  nextcloud:
+    driver: bridge
